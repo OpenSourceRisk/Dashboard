@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <!-- Meta, title, CSS, favicons, etc. -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>ORE Risk Dashboard | Limits Table</title>
+
+    <!-- Bootstrap -->
+    <link href="vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link href="vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+    <!-- NProgress -->
+    <link href="vendors/nprogress/nprogress.css" rel="stylesheet">
+    <!-- iCheck -->
+    <link href="vendors/iCheck/skins/flat/green.css" rel="stylesheet">
+    <!-- Datatables -->
+    <link href="vendors/datatables.net-bs/css/dataTables.bootstrap.min.css" rel="stylesheet">
+    <link href="vendors/datatables.net-buttons-bs/css/buttons.bootstrap.min.css" rel="stylesheet">
+    <link href="vendors/datatables.net-fixedheader-bs/css/fixedHeader.bootstrap.min.css" rel="stylesheet">
+    <link href="vendors/datatables.net-responsive-bs/css/responsive.bootstrap.min.css" rel="stylesheet">
+    <link href="vendors/datatables.net-scroller-bs/css/scroller.bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom Theme Style -->
+    <link href="css/custom.min.css" type="text/css" rel="stylesheet">
+  </head>
+
+  <body class="nav-sm">
+    <div class="container body">
+      <div class="main_container">
+        <div class="col-md-3 left_col">
+          <div class="left_col scroll-view">
+            <div class="navbar nav_title" style="border: 0;">
+              <a href="index.html" class="site_title"><i class="fa fa-home"></i> <span>Gentellela Alela!</span></a>
+            </div>
+
+            <div class="clearfix"></div>
+            <br>
+
+            <!-- sidebar menu -->
+            <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
+              <div class="menu_section active">
+                <h3>Live On</h3>
+                <ul class="nav side-menu" style="">
+                  <!--<li class=""><a onclick="pdfMe();"><i class="fa fa-download"></i> PDF </span></a></li>-->
+                  <li class=""><a class="close-link" href="tables_dynamic.html"><i class="fa fa-table"></i> Limits </a></li>
+                  <li class=""><a class="close-link" href="#glossary" data-toggle="modal" data-id="glossary" data-target=".bs-example-modal-sm1"><i class="fa fa-question-circle-o"></i> Glossary </a></li>
+                </ul>
+              </div>
+
+            </div>
+            <!-- /sidebar menu -->
+
+            <!-- /menu footer buttons -->
+            <div class="sidebar-footer hidden-small">
+              <a data-toggle="tooltip" data-placement="top" title="Settings">
+                <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
+              </a>
+              <a data-toggle="tooltip" data-placement="top" title="FullScreen">
+                <span class="glyphicon glyphicon-fullscreen" aria-hidden="true"></span>
+              </a>
+              <a data-toggle="tooltip" data-placement="top" title="Lock">
+                <span class="glyphicon glyphicon-eye-close" aria-hidden="true"></span>
+              </a>
+              <a data-toggle="tooltip" data-placement="top" title="Logout">
+                <span class="glyphicon glyphicon-off" aria-hidden="true"></span>
+              </a>
+            </div>
+            <!-- /menu footer buttons -->
+          </div>
+        </div>
+
+        <!-- page content -->
+        <div class="right_col" role="main">
+
+          <div class="row">
+
+            <div class="col-md-12">
+              <div class="x_title clearfix">
+                <h2>ORE Risk Dashboard</h2>
+              </div>
+            </div>
+
+            <div class="clearfix"></div>
+
+            <div class="row">
+              <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="x_panel">
+                  <div class="x_title">
+                    <h2>Limits report</h2>
+                    <ul class="nav navbar-right panel_toolbox">
+                      <li>
+
+                      <label class="btn btn-sm"> Bus Date :
+                        <select class="selectpicker pull-right" data-live-search="true" data-size="7"
+                                id="businessDates" name="businessDate" data-toggle="tooltip" data-placement="bottom" data-title="Select Business Date">
+                          <option>Choose Business Date</option>
+                        </select>
+                      </label>
+                      </li>
+                      <li>
+                        <label class="btn btn-sm"> Metric :
+                          <select class="selectpicker-bg pull-right" id="limitMetric_" name="limitMetric_" data-toggle="tooltip" data-placement="top" data-title="Select Risk Metric">
+                            <!-- the options are filled in by Javascript-->
+                          </select>
+                        </label>
+                      </li>
+                    </ul>
+                    <div class="clearfix"></div>
+                  </div>
+                  <div class="x_content">
+
+                    <ul class="nav nav-tabs">
+                      <li class="active limits-tab"><a data-toggle="tab" role="tab" data-target="#LimitsData">All Records</a></li>
+                      <li class="breaches-tab"><a data-toggle="tab" role="tab" data-target="#BreachesData">Breaches</a></li>
+                    </ul>
+
+                    <div class="tab-content">
+                      <br/>
+                      <div id="LimitsData" class="tab-pane fade in active" role="tabpanel">
+                        <table id="datatable-responsive" class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0" width="100%">
+                    </table>
+                        </div>
+
+                      <div id="BreachesData" class="tab-pane fade in" role="tabpanel">
+                    <table id="datatable-responsive2" class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0" width="100%">
+                    </table>
+                        </div>
+                    </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- /modals -->
+        <!-- glossary modal - there is code in glossary.js to replace this div with the relevant html. -->
+        <div id="glossaryModal"></div>
+        <!-- /page content -->
+
+        <!-- footer content -->
+        <footer>
+          <!--<div class="pull-right">-->
+            <!--Gentelella - Bootstrap Admin Template by <a href="https://colorlib.com">Colorlib</a>-->
+          <!--</div>-->
+          <!--<div class="clearfix"></div>-->
+        </footer>
+        <!-- /footer content -->
+      </div>
+    </div>
+    </div>
+    <!-- jQuery -->
+    <script src="vendors/jquery/dist/jquery.min.js"></script>
+    <!-- Bootstrap -->
+    <script src="vendors/bootstrap/dist/js/bootstrap.min.js"></script>
+    <!-- FastClick -->
+    <script src="vendors/fastclick/lib/fastclick.js"></script>
+    <!-- NProgress -->
+      <script src="vendors/nprogress/nprogress.js"></script>
+      <script src="vendors/html2canvas/dist/html2canvas.min.js"></script>
+      <script src="vendors/html2canvas/dist/html2canvas.svg.min.js"></script>
+      <script src="vendors/pdfmake/build/pdfmake.min.js"></script>
+    <!-- Datatables -->
+    <script src="vendors/datatables.net/js/jquery.dataTables.min.js"></script>
+    <script src="vendors/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
+    <script src="vendors/datatables.net-buttons/js/dataTables.buttons.min.js"></script>
+    <script src="vendors/datatables.net-buttons-bs/js/buttons.bootstrap.min.js"></script>
+    <script src="vendors/datatables.net-buttons/js/buttons.flash.min.js"></script>
+    <script src="vendors/datatables.net-buttons/js/buttons.html5.min.js"></script>
+    <script src="vendors/datatables.net-buttons/js/buttons.print.min.js"></script>
+    <script src="vendors/datatables.net-fixedheader/js/dataTables.fixedHeader.min.js"></script>
+    <script src="vendors/datatables.net-keytable/js/dataTables.keyTable.min.js"></script>
+    <script src="vendors/datatables.net-responsive/js/dataTables.responsive.min.js"></script>
+    <script src="vendors/datatables.net-responsive-bs/js/responsive.bootstrap.js"></script>
+    <script src="vendors/datatables.net-scroller/js/dataTables.scroller.min.js"></script>
+    <script src="vendors/jszip/dist/jszip.min.js"></script>
+    <script src="vendors/pdfmake/build/vfs_fonts.js"></script>
+    <script src="js/moment/moment.min.js"></script>
+
+    <!-- Custom Theme Scripts -->
+    <script src="js/custom.min.js"></script>
+    <script src="js/common/fetch.js"></script>
+    <script src="js/echart/limitsTable.js"></script>
+    <script src="js/echart/chartManager.js"></script>
+
+<script src="js/glossary.js"></script>
+
+    <!-- Datatables -->
+    <script>
+        window.onload = limitLoad_;
+    </script>
+    <!-- /Datatables -->
+  </body>
+</html>
+

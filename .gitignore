@@ -1,0 +1,9 @@
+.idea
+target
+build
+/build/
+.DS_Store
+bower_components
+node
+node_modules
+vendors

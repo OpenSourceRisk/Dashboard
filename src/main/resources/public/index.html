@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<!--
+ Copyright (C) 2016 Quaternion Risk Management Ltd
+ All rights reserved.
+
+ This file is part of ORE, a free-software/open-source library
+ for transparent pricing and risk analysis - http://opensourcerisk.org
+
+ ORE is free software: you can redistribute it and/or modify it
+ under the terms of the Modified BSD License.  You should have received a
+ copy of the license along with this program.
+ The license is also available online at <http://opensourcerisk.org>
+
+ This program is distributed on the basis that it will form a useful
+ contribution to risk analytics and model standardisation, but WITHOUT
+ ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+ FITNESS FOR A PARTICULAR PURPOSE. See the license for more details.
+  -->
+
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <!-- Meta, title, CSS, favicons, etc. -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta about="based on Gentelella Bootstrap Admin Template / Reposit Ltd">
+
+    <title>ORE Risk Dashboard</title>
+
+    <!-- Bootstrap -->
+    <link href="vendors/bootstrap/dist/css/bootstrap.min.css" type="text/css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link href="vendors/font-awesome/css/font-awesome.min.css" type="text/css" rel="stylesheet">
+    <!-- NProgress -->
+    <link href="vendors/nprogress/nprogress.css" type="text/css" rel="stylesheet">
+    <!-- iCheck -->
+    <link href="vendors/iCheck/skins/flat/green.css" type="text/css" rel="stylesheet">
+    <!-- bootstrap-progressbar -->
+    <link href="vendors/bootstrap-progressbar/css/bootstrap-progressbar-3.3.4.css" type="text/css" rel="stylesheet">
+    <link href="vendors/switchery/dist/switchery.min.css" type="text/css" rel="stylesheet">
+
+    <!-- Custom Theme Style -->
+    <link href="css/custom.min.css" type="text/css" rel="stylesheet">
+
+    <!--<link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">-->
+
+</head>
+
+<body class="nav-sm">
+<div class="container body" id="export_me_">
+    <!-- some defaults for starters -->
+    <input type="hidden" value="20150630" id="businessDate" name="busdate"/>
+    <input type="hidden" value="Total" id="hierarchy" name="hierarchy"/>
+
+    <div class="main_container">
+        <div class="col-md-3 left_col">
+            <div class="left_col scroll-view">
+                <div class="navbar nav_title" style="border: 0;">
+                    <a href="index.html" class="site_title"><i class="fa fa-home"></i> <span>Open Risk Engine</span></a>
+                </div>
+
+                <div class="clearfix"></div>
+
+                <!-- menu profile quick info -->
+                <div class="profile">
+                    <div class="profile_pic">
+                        <img src="" alt="..." class="img-circle profile_img">
+                    </div>
+                </div>
+                <!-- /menu profile quick info -->
+
+                <br>
+
+                <!-- sidebar menu -->
+                <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
+                    <div class="menu_section active">
+                        <h3>Live On</h3>
+                        <ul class="nav side-menu" style="">
+                            <li class=""><a onclick="pdfMe();"><i class="fa fa-download"></i> PDF </span></a></li>
+                            <li class=""><a class="close-link" href="tables_dynamic.html"><i class="fa fa-table"></i> Limits </a></li>
+                            <!--li class=""><a class="close-link" href="#" onclick="chartManager.toggleLimitsClick(this);"><i class="fa fa-toggle-on"></i> Limits On/Off</a></li-->
+                            <li class=""><a class="close-link" href="#glossary" data-toggle="modal" data-id="glossary" data-target=".bs-example-modal-sm1"><i class="fa fa-question-circle-o"></i> Glossary </a></li>
+                        </ul>
+                    </div>
+
+                </div>
+                <!-- /sidebar menu -->
+
+                <!-- /menu footer buttons -->
+                <div class="sidebar-footer hidden-small">
+                    <a data-toggle="tooltip" data-placement="top" title="" data-original-title="Settings">
+                        <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
+                    </a>
+                    <a data-toggle="tooltip" data-placement="top" title="" data-original-title="FullScreen">
+                        <span class="glyphicon glyphicon-fullscreen" aria-hidden="true"></span>
+                    </a>
+                    <a data-toggle="tooltip" data-placement="top" title="" data-original-title="Lock">
+                        <span class="glyphicon glyphicon-eye-close" aria-hidden="true"></span>
+                    </a>
+                    <a data-toggle="tooltip" data-placement="top" title="" data-original-title="Logout">
+                        <span class="glyphicon glyphicon-off" aria-hidden="true"></span>
+                    </a>
+                </div>
+                <!-- /menu footer buttons -->
+            </div>
+        </div>
+
+
+        <!-- page content -->
+        <div class="right_col" role="main">
+
+            <div class="row">
+
+                <div class="col-md-12">
+                    <div class="x_title clearfix">
+                        <h2>ORE Risk Dashboard</h2>
+
+                        <div class="col-md-8 col-sm-8 col-xs-12">
+
+                            <div class="col-md-12 col-sm-12 col-xs-12">
+                                <div>
+                                <div class="btn-group btn-sm" data-toggle="buttons">
+                                    <label name="options" class="btn btn-sm active">
+                                        <input type="radio" name="options" id="option0" value="0" autocomplete="off"
+                                               checked>
+                                        Credit
+                                        Rating </label>
+                                    <label name="options" class="btn btn-sm">
+                                        <input type="radio" name="options" id="option1" value="1" autocomplete="off">
+                                        Counterparty
+                                    </label>
+                                    <label name="options" class="btn btn-sm">
+                                        <input type="radio" name="options" id="option2" value="2" autocomplete="off">
+                                        Netting
+                                        Set
+                                    </label>
+                                    <label name="options" class="btn btn-sm">
+                                        <input type="radio" name="options" id="option3" value="3" autocomplete="off"> Trade
+                                    </label>
+
+                                    <label class="btn btn-sm"> Bus Date :
+                                        <select class="selectpicker pull-right" data-live-search="true" data-size="7"
+                                                id="businessDates" name="businessDate" data-toggle="tooltip" data-placement="bottom" data-title="Select Business Date">
+                                            <option>Choose Business Date</option>
+                                        </select>
+                                    </label>
+                                </div>
+                                    <label class="checkbox-inline">
+                                        <input type="checkbox" checked id="limitToggle" > Limits
+                                    </label>
+                                </div>
+                            </div>
+
+                            <div class="row col-md-12 col-sm-12 col-xs-12">
+                                <div>
+                                    <ol id="periscope" class="breadcrumb">
+                                    <li class="breadcrumb-item"><a href="index.html" id="crumb0" data-hierarchy="total" data-item="Total" data-level="0"><i class="fa fa-home"  data-toggle="tooltip" data-placement="top" data-title="Reset"></i></a></li>
+                                    </ol>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="x_content">
+                        <div class="col-md-6 col-sm-12 col-xs-12">
+                            <div class="demo-container" style="height:275px">
+                                <div id="line_total_exposure" style="height:275px;" data-toggle="tooltip" data-placement="top" data-title="Click Glossary for help"></div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6 col-sm-12 col-xs-12">
+                            <div class="demo-container" style="height:275px">
+                                <div id="line_exposure_profile" style="height:275px;" data-toggle="tooltip" data-placement="top" data-title="Click Glossary for help"></div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="x_title"></div>
+                <div class="col-md-3 col-sm-3 col-xs-12">
+                    <div class="x_title" >
+                        <h2>Risk Gauge</h2>
+                        <ul class="nav navbar-right panel_toolbox">
+                            <li>
+                                <select class="selectpicker-riskgauge pull-right" id="gauge1_" name="gauge1" data-toggle="tooltip" data-placement="top" data-title="Select Risk Metric">
+                                    <!-- the options are filled in by Javascript-->
+                                </select>
+                            </li>
+                            <li><a class="close-link" href="#glossary" data-toggle="modal" data-id="glossary" data-target=".bs-example-modal-sm1"><i class="fa fa-question-circle-o" data-toggle="tooltip" data-placement="top" data-title="Help"></i></a></li>
+                        </ul>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="x_content">
+                        <div id="risk_gauge" style="height:280px;"></div>
+                    </div>
+
+                </div>
+
+                <div class="col-md-3 col-sm-3 col-xs-12">
+                    <div class="x_title" >
+                        <h2 name="donut_cva">CVA</h2>
+                        <ul class="nav navbar-right panel_toolbox">
+                            <li><a class="close-link" href="#xva-zoom" data-toggle="modal" data-id="cva" data-target=".bs-example-modal-sm"><i class="fa fa-search-plus" data-toggle="tooltip" data-placement="top" data-title="Zoom"></i></a></li>
+                            <li><a class="close-link" href="#glossary" data-toggle="modal" data-id="glossary" data-target=".bs-example-modal-sm1"><i class="fa fa-question-circle-o" data-toggle="tooltip" data-placement="top" data-title="Help"></i></a></li>
+                        </ul>
+                        <div class="clearfix">
+                        </div>
+                    </div>
+                    <div class="x_content">
+                        <div id="donut_cva" style="height:280px;"></div>
+                    </div>
+                </div>
+                <div class="col-md-3 col-sm-3 col-xs-12">
+                    <div class="x_title" >
+                        <h2 name="donut_fva">FVA</h2>
+                        <ul class="nav navbar-right panel_toolbox">
+                            <li><a class="close-link" href="#xva-zoom" data-toggle="modal" data-id="fva" data-target=".bs-example-modal-sm"><i class="fa fa-search-plus" data-toggle="tooltip" data-placement="top" data-title="Zoom"></i></a></li>
+                            <li><a class="close-link" href="#glossary" data-toggle="modal" data-id="glossary" data-target=".bs-example-modal-sm1"><i class="fa fa-question-circle-o" data-toggle="tooltip" data-placement="top" data-title="Help"></i></a></li>
+                        </ul>
+                        <div class="clearfix">
+                        </div>
+                    </div>
+                    <div class="x_content">
+                        <div id="donut_fva" style="height:280px"></div>
+                    </div>
+                </div>
+                <div class="col-md-3 col-sm-3 col-xs-12">
+                    <div class="x_title" >
+                        <h2 name="donut_colva">ColVA</h2>
+                        <ul class="nav navbar-right panel_toolbox">
+                            <li><a class="close-link" href="#xva-zoom" data-toggle="modal" data-id="colva" data-target=".bs-example-modal-sm"><i class="fa fa-search-plus" data-toggle="tooltip" data-placement="top" data-title="Zoom"></i></a></li>
+                            <li><a class="close-link" href="#glossary" data-toggle="modal" data-id="glossary" data-target=".bs-example-modal-sm1"><i class="fa fa-question-circle-o" data-toggle="tooltip" data-placement="top" data-title="Help"></i></a></li>
+                        </ul>
+
+                        <div class="clearfix">
+                        </div>
+                    </div>
+                    <div class="x_content">
+                        <div id="donut_colva" style="height:280px"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="x_title"></div>
+
+                <div class="col-md-4 col-sm-4 col-xs-12">
+                    <div class="x_title" >
+                        <h2 name="bar1"></h2>
+                        <ul class="nav navbar-right panel_toolbox">
+                            <li>
+                                <select class="selectpicker-bg pull-right" id="bar1_" name="bar1" data-toggle="tooltip" data-placement="top" data-title="Select Risk Metric">
+                                    <!-- the options are filled in by Javascript-->
+                                </select>
+                            </li>
+                            <li><a class="close-link" href="#glossary" data-toggle="modal" data-id="glossary" data-target=".bs-example-modal-sm1"><i class="fa fa-question-circle-o" data-toggle="tooltip" data-placement="top" data-title="Help"></i></a></li>
+                        </ul>
+
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="x_content">
+                        <div id="bar_1" style="height:200px;"></div>
+                    </div>
+                </div>
+                <div class="col-md-4 col-sm-4 col-xs-12">
+                    <div class="x_title" >
+                        <h2 name="bar2"></h2>
+                        <ul class="nav navbar-right panel_toolbox">
+                            <li>
+                                <select class="selectpicker-bg pull-right" id="bar2_" name="bar2" data-toggle="tooltip" data-placement="top" data-title="Select Risk Metric">
+                                    <!-- the options are filled in by Javascript-->
+                                </select>
+                            </li>
+                            <li><a class="close-link" href="#glossary" data-toggle="modal" data-id="glossary" data-target=".bs-example-modal-sm1"><i class="fa fa-question-circle-o" data-toggle="tooltip" data-placement="top" data-title="Help"></i></a></li>
+                        </ul>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="x_content">
+                        <div id="bar_2" style="height:200px;"></div>
+                    </div>
+                </div>
+                <div class="col-md-4 col-sm-4 col-xs-12">
+                    <div class="x_title" >
+                        <h2 name="bar3"></h2>
+                        <ul class="nav navbar-right panel_toolbox">
+                            <li>
+                                <select class="selectpicker-bg pull-right" id="bar3_" name="bar3" data-toggle="tooltip" data-placement="top" data-title="Select Risk Metric">
+                                    <!-- the options are filled in by Javascript-->
+                                </select>
+                            </li>
+                            <li><a class="close-link" href="#glossary" data-toggle="modal" data-id="glossary" data-target=".bs-example-modal-sm1"><i class="fa fa-question-circle-o" data-toggle="tooltip" data-placement="top" data-title="Help"></i></a></li>
+                        </ul>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="x_content">
+                        <div id="bar_3" style="height:200px;"></div>
+                    </div>
+                </div>
+                <div class="col-md-4 col-sm-4 col-xs-12">
+                    <div class="x_title" >
+                        <h2 name="bar4"></h2>
+                        <ul class="nav navbar-right panel_toolbox">
+                            <li>
+                                <select class="selectpicker-bg pull-right" id="bar4_" name="bar4" data-toggle="tooltip" data-placement="top" data-title="Select Risk Metric">
+                                    <!-- the options are filled in by Javascript-->
+                                </select>
+                            </li>
+                            <li><a class="close-link" href="#glossary" data-toggle="modal" data-id="glossary" data-target=".bs-example-modal-sm1"><i class="fa fa-question-circle-o" data-toggle="tooltip" data-placement="top" data-title="Help"></i></a></li>
+                        </ul>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="x_content">
+                        <div id="bar_4" style="height:200px;"></div>
+                    </div>
+                </div>
+                <div class="col-md-4 col-sm-4 col-xs-12">
+                    <div class="x_title" >
+                        <h2 name="bar5"></h2>
+                        <ul class="nav navbar-right panel_toolbox">
+                            <li>
+                                <select class="selectpicker-bg pull-right" id="bar5_" name="bar5" data-toggle="tooltip" data-placement="top" data-title="Select Risk Metric">
+                                    <!-- the options are filled in by Javascript-->
+                                </select>
+                            </li>
+                            <li><a class="close-link" href="#glossary" data-toggle="modal" data-id="glossary" data-target=".bs-example-modal-sm1"><i class="fa fa-question-circle-o" data-toggle="tooltip" data-placement="top" data-title="Help"></i></a></li>
+                        </ul>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="x_content">
+                        <div id="bar_5" style="height:200px;"></div>
+                    </div>
+                </div>
+                <div class="col-md-4 col-sm-4 col-xs-12">
+                    <div class="x_title" >
+                        <h2 name="bar6"></h2>
+                        <ul class="nav navbar-right panel_toolbox">
+                            <li>
+                                <select class="selectpicker-bg pull-right" id="bar6_" name="bar6"  data-toggle="tooltip" data-placement="top" data-title="Select Risk Metric">
+                                    <!-- the options are filled in by Javascript-->
+                                </select>
+                            </li>
+                            <li><a class="close-link" href="#glossary" data-toggle="modal" data-id="glossary" data-target=".bs-example-modal-sm1"><i class="fa fa-question-circle-o" data-toggle="tooltip" data-placement="top" data-title="Help"></i></a></li>
+                        </ul>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="x_content">
+                        <div id="bar_6" style="height:200px;"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Small modal -->
+
+        <div id="xva-zoom" class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span>
+                        </button>
+                        <h4 class="modal-title" id="myModalLabel2">XVA Graph</h4>
+                    </div>
+                    <div class="modal-body">
+                            <div id="donut_xva" style="height:600px;width:550px"></div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /modals -->
+        <!-- glossary modal - there is code in glossary.js to replace this div with the relevant html. -->
+        <div id="glossaryModal"></div>
+
+        <!-- /page content -->
+
+        <!-- footer content -->
+        <footer>
+            <div class="pull-right">
+                <!--based on Gentelella Bootstrap Admin Template -->
+            </div>
+            <div class="clearfix"></div>
+        </footer>
+        <!-- /footer content -->
+    </div>
+</div>
+
+<!-- jQuery -->
+<script src="vendors/jquery/dist/jquery.min.js"></script>
+<!-- Bootstrap -->
+<script src="vendors/bootstrap/dist/js/bootstrap.min.js"></script>
+<!-- FastClick -->
+<script src="vendors/fastclick/lib/fastclick.js"></script>
+<!-- NProgress -->
+<script src="vendors/nprogress/nprogress.js"></script>
+<script src="vendors/echarts-3.2.3/dist/echarts.min.js"></script>
+<script src="vendors/html2canvas/dist/html2canvas.min.js"></script>
+<script src="vendors/html2canvas/dist/html2canvas.svg.min.js"></script>
+<script src="vendors/pdfmake/build/pdfmake.min.js"></script>
+<script src="vendors/switchery/dist/switchery.min.js"></script>
+
+<!-- Custom Themes/Scripts -->
+<script src="js/moment/moment.min.js"></script>
+<script src="js/custom.min.js"></script>
+<script src="js/common/fetch.js"></script>
+
+<script src="js/echart/chart-theme.js"></script>
+<script src="js/echart/echart.js"></script>
+<script src="js/echart/chartManager.js"></script>
+
+<script src="js/glossary.js"></script>
+
+<script language="javascript">
+    window.onload = load_;
+</script>
+
+</body>
+</html>

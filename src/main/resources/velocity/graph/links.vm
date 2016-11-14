@@ -1,0 +1,3 @@
+#foreach($link in $links)
+<a href="$link">$link</a><br>
+#end
